@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Light bulb body with gradient -->
+  <path d="M32 4C22.0589 4 14 12.0589 14 22C14 27.5601 16.5 32.5 20.5 35.5C23.5 37.8333 25 40.6667 25 44V48C25 48.5523 25.4477 49 26 49H38C38.5523 49 39 48.5523 39 48V44C39 40.6667 40.5 37.8333 43.5 35.5C47.5 32.5 50 27.5601 50 22C50 12.0589 41.9411 4 32 4Z" fill="url(#bulbGradient)" stroke="#C9A96E" stroke-width="1.5"/>
+  
+  <!-- Bulb base -->
+  <path d="M26 48V52C26 54.2091 27.7909 56 30 56H34C36.2091 56 38 54.2091 38 52V48" stroke="url(#baseGradient)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M26 56V58C26 59.1046 26.8954 60 28 60H36C37.1046 60 38 59.1046 38 58V56" stroke="url(#baseGradient)" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Light rays -->
+  <path d="M32 4V10" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M50 22H44" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M14 22H20" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M45 9L40 14" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M19 9L24 14" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Filament -->
+  <path d="M32 20C33.1046 20 34 20.8954 34 22C34 23.1046 33.1046 24 32 24C30.8954 24 30 23.1046 30 22C30 20.8954 30.8954 20 32 20Z" fill="url(#filamentGradient)"/>
+  <path d="M32 24V30" stroke="url(#filamentGradient)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M29 27H35" stroke="url(#filamentGradient)" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Inner glow -->
+  <circle cx="32" cy="30" r="8" fill="url(#glowGradient)" opacity="0.3"/>
+  
+  <!-- Definitions for gradients -->
+  <defs>
+    <linearGradient id="bulbGradient" x1="14" y1="4" x2="50" y2="49" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    
+    <linearGradient id="baseGradient" x1="26" y1="48" x2="38" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E"/>
+    </linearGradient>
+    
+    <linearGradient id="filamentGradient" x1="29" y1="20" x2="35" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E"/>
+    </linearGradient>
+    
+    <radialGradient id="glowGradient" cx="32" cy="30" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg> 

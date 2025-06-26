@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title id="pageTitle">合盛辅料 - 客户专享报价工具</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #D4AF37; /* 金色作为主色调，体现高端时尚感 */
+            --primary-dark: #B8860B; /* 深金色 */
+            --primary-active: #856600; /* 激活状态的金色 */
+            --primary-light-focus: rgba(212, 175, 55, 0.15); /* 金色焦点光晕 */
+            --dark-bg: #F8F5F0; /* 米白色背景，柔和高端 */
+            --card-bg: #FFFFFF; /* 白色卡片 */
+            --card-bg-alt: #F9F6F1; /* 卡片备用色 */
+            --card-border: #E8E0D0; /* 浅金色边框 */
+            --text-light: #222222; /* 深灰色文本 */
+            --text-medium: #555555; /* 中灰色文本 */
+            --text-muted: #888888; /* 浅灰色文本 */
+            --success: #2E7D32; /* 深绿色成功色 */
+            --error: #C62828; /* 深红色错误色 */
+            --warning: #FF8F00; /* 橙色警告色 */
+            --input-bg: #FFFFFF; /* 白色输入框 */
+            --input-border: #E0D8C8; /* 输入框边框 */
+            --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08); /* 柔和阴影 */
+            --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.12); /* 中等阴影 */
+            --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 标准过渡效果 */
+            
+            /* Light theme colors for image generation */
+            --image-bg-light: #FFFFFF;         /* Pure white background */
+            --image-text-main: #000000;        /* Pure black for main text */
+            --image-text-secondary: #333333;   /* Dark gray for secondary text */
+            --image-card-bg-light: #fdfdfd;    /* Very slightly off-white for cards */
+            --image-card-border-light: #dddddd; /* Light gray border */
+            --image-watermark: rgba(0, 0, 0, 0.08); /* Light black watermark for white bg */
+            --image-primary-value-text: #D4AF37; /* 金色作为强调值 */
+        }
+
+        body {
+    font-family: 'Georgia', 'Times New Roman', 'Noto Serif SC', serif; /* 更严肃稳重的字体组合 */
+    background: var(--dark-bg);
+    color: var(--text-light);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.6; /* 更紧凑的行高，提升稳重感 */
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="%23F8F5F0"/><path d="M0 0L100 100M100 0L0 100" stroke="%23E8E0D0" stroke-width="0.5" stroke-opacity="0.3"/></svg>'); /* 精致纹理背景 */
+    background-attachment: fixed;
+}
+
+        .container {
+    width: 100%;
+    max-width: 1200px; /* 桌面端更宽容器 */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+        .card {
+    background: var(--card-bg);
+    border-radius: 24px; /* 更圆润的边角 */
+    box-shadow: var(--shadow-soft);
+    padding: 40px; /* 增加内边距 */
+    border: 1px solid var(--card-border);
+    position: relative;
+    transition: var(--transition-standard);
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.logo-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary);
+    border-radius: 8px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.company-info {
+    text-align: left;
+}
+
+h1 {
+    font-size: 34px; /* 更大的标题 */
+    font-weight: 600; /* 增加字重，更显稳重 */
+    margin-bottom: 8px;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+@media (max-width: 768px) {
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .company-info {
+        text-align: center;
+        margin-top: 15px;
+    }
+    .logo-placeholder {
+        margin-right: 0;
+    }
+}
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+        }
+        .card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-3px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: -10px;
+            right: 0px;
+            z-index: 10;
+            display: flex;
+            gap: 5px;
+        }
+
+        .language-switcher button {
+            background: var(--input-bg);
+            color: var(--text-medium);
+            border: 1px solid var(--input-border);
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .language-switcher button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .language-switcher button.active {
+            background: var(--primary-dark);
+            color: white;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 32px; /* 更大的标题 */
+            font-weight: 400; /* 更轻的字重，高端感 */
+            margin-bottom: 12px;
+            color: var(--text-light);
+            letter-spacing: 0.8px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-medium);
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .form-group label {
+            flex-basis: 150px;
+            flex-shrink: 0;
+            margin-right: 12px;
+            margin-bottom: 0;
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 15px;
+            padding-top: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: var(--primary);
+            font-size: 15px;
+            line-height: 1;
+            width: 16px;
+            text-align: center;
+        }
+
+        .input-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 16px 20px; /* 更大的内边距 */
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 12px; /* 更圆润的边角 */
+            color: var(--text-light);
+            font-size: 15px;
+            font-family: inherit;
+            transition: var(--transition-standard);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light-focus), inset 0 1px 3px rgba(0,0,0,0.05);
+            background: var(--card-bg);
+            transform: translateY(-1px);
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding-right: 45px;
+        }
+
+        .input-wrapper::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free', 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            right: 18px;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            font-size: 12px;
+            transition: color 0.2s ease-in-out;
+            display: none;
+        }
+
+        .input-wrapper:has(select)::after {
+            display: block;
+        }
+        .input-wrapper:has(select:focus)::after {
+            color: var(--primary);
+        }
+
+        .form-group > input,
+        .form-group > select {
+            flex-grow: 1;
+            width: auto;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light-focus);
+            background: var(--card-bg);
+        }
+
+        input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .toggle-section {
+            display: flex;
+            flex-direction: column;
+            margin-top: 18px;
+        }
+        .toggle-section .form-group {
+            margin-bottom: 18px;
+        }
+        .toggle-section .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .toggle-row {
+            display: none;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 30px; /* 更圆润的按钮 */
+            padding: 16px 24px; /* 更大的按钮 */
+            font-size: 16px;
+            font-weight: 500; /* 较轻的字重 */
+            cursor: pointer;
+            transition: var(--transition-standard);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+        .btn:hover:not(.loading) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, var(--primary), var(--primary));
+            border-color: rgba(255,255,255,0.3);
+        }
+        .btn:active:not(.loading) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+            background: var(--primary-active);
+        }
+        #calculateBtn {
+            margin-top: 30px;
+        }
+
+
+        .btn.loading .btn-text,
+        .btn.loading .btn-icon {
+            opacity: 0;
+        }
+        .btn .loading-spinner {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            animation: spin 0.8s linear infinite;
+        }
+        .btn.loading .loading-spinner {
+            display: block;
+            opacity: 1;
+        }
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .btn:hover:not(.loading) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.25);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .btn:active:not(.loading) {
+            transform: translateY(0px);
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+            background: var(--primary-active);
+            filter: none;
+        }
+
+        .btn .btn-icon {
+            font-size: 16px;
+            transition: opacity 0.2s ease-out;
+        }
+         .btn .btn-text {
+            transition: opacity 0.2s ease-out;
+        }
+
+
+        #result {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        #result.has-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .company-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: white;
+        }
+
+        .company-subtitle {
+            font-size: 13px;
+            color: var(--text-medium);
+            margin-bottom: 8px;
+        }
+
+        .customer-info, .date-quote {
+            font-size: 13px;
+            color: var(--text-medium);
+            margin-bottom: 4px;
+        }
+
+        .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px; /* 更大的间距 */
+    margin: 30px 0;
+}
+
+@media (min-width: 1024px) {
+    .info-grid {
+        grid-template-columns: repeat(3, 1fr); /* 桌面端三列布局 */
+    }
+}
+        .info-card {
+            background: var(--input-bg);
+            border-radius: 15px; /* 更圆润的边角 */
+            padding: 20px; /* 更大的内边距 */
+            border: 1px solid var(--input-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition-standard);
+            box-shadow: var(--shadow-soft);
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--primary-light-focus);
+        }
+
+        .info-card {
+            background: var(--input-bg);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid var(--input-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 0;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .info-card p {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: right;
+            margin-top: 0;
+            flex-grow: 1;
+            word-break: break-all;
+        }
+
+        .price-details {
+            margin: 20px 0;
+        }
+
+        .price-details h3 {
+            font-size: 17px;
+            text-align: center;
+            margin-bottom: 15px;
+            color: white;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+            font-weight: 600;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--input-border);
+        }
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-item .label {
+             font-size: 14px;
+             color: var(--text-medium);
+        }
+        .price-item .value {
+             font-size: 14px;
+             font-weight: 500;
+             color: var(--text-light);
+        }
+
+        .total-price {
+            background: var(--primary-light-focus);
+            border-radius: 15px; /* 更圆润的边角 */
+            padding: 20px 24px; /* 更大的内边距 */
+            margin-top: 20px;
+            border: 1px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-standard);
+        }
+        .total-price:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .total-price .label {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .total-price .value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .total-price.grand-total {
+             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+             color: white;
+             border-color: var(--primary-dark);
+             margin-top: 10px;
+        }
+        .total-price.grand-total .label,
+        .total-price.grand-total .value {
+            color: white;
+        }
+
+
+        .note {
+            background: var(--card-bg-alt);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text-medium);
+            line-height: 1.6;
+            border: 1px solid var(--input-border);
+        }
+
+        .note-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .main-actions {
+             display: flex;
+             gap: 12px;
+        }
+
+
+        .btn-secondary {
+            background: var(--input-bg);
+            color: var(--text-light);
+            border: 1px solid var(--input-border);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover:not(.loading) {
+            background: var(--card-border);
+            border-color: var(--card-border);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .btn-secondary:active:not(.loading) {
+            transform: translateY(0px);
+            background: var(--input-border);
+            filter: brightness(0.95);
+        }
+
+        .download-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0px;
+        }
+
+        .download-options button {
+            background: var(--input-bg);
+            color: var(--text-medium);
+            border: 1px solid var(--input-border);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .download-options button i {
+            font-size: 12px;
+        }
+
+        .download-options button:hover {
+            background: var(--primary-light-focus);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+         .download-options button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        /* Styles for image generation (light theme) */
+        .image-export-theme {
+            font-family: "SimHei", "SimSun", "Noto Sans SC", Roboto, Arial, sans-serif !important;
+            background-color: var(--image-bg-light) !important;
+            color: var(--image-text-main) !important;
+            border: 1px solid var(--image-card-border-light) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+        }
+        .image-export-theme .result-header {
+            border-bottom-color: var(--image-card-border-light) !important;
+        }
+        .image-export-theme .company-title,
+        .image-export-theme .price-details h3,
+        .image-export-theme .total-price .label, /* Keep label for total price black */
+        .image-export-theme .note-title {
+            color: var(--image-text-main) !important;
+        }
+        .image-export-theme .company-subtitle,
+        .image-export-theme .customer-info,
+        .image-export-theme .date-quote,
+        .image-export-theme .price-item .label,
+        .image-export-theme .note,
+        .image-export-theme .note p {
+            color: var(--image-text-secondary) !important;
+        }
+        .image-export-theme .info-card {
+            background: var(--image-card-bg-light) !important;
+            border-color: var(--image-card-border-light) !important;
+            display: flex; /* Ensure flex for alignment */
+            justify-content: space-between; /* Align items in card */
+            align-items: center;
+            padding: 10px 12px; /* Adjust padding if needed */
+        }
+        .image-export-theme .info-card h3 { /* Label in info card */
+            color: var(--image-text-secondary) !important;
+            font-size: 13px; /* Adjusted font size */
+            font-weight: normal;
+            margin-right: auto; /* Push value to the right */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .image-export-theme .info-card p { /* Value in info card */
+            color: var(--image-text-main) !important;
+            font-size: 13px; /* Adjusted font size */
+            font-weight: bold;
+            text-align: right; /* Ensure value is right-aligned */
+            word-break: normal; /* Prevent awkward breaks if possible */
+        }
+        .image-export-theme .price-item {
+            border-bottom-color: var(--image-card-border-light) !important;
+        }
+        .image-export-theme .price-item .value { /* Values in price breakdown */
+            color: var(--image-text-main) !important;
+            font-weight: bold;
+        }
+        .image-export-theme .total-price { /* Subtotal row */
+            background: #f0f0f0 !important;
+            border-color: #dddddd !important;
+        }
+        .image-export-theme .total-price .label,
+        .image-export-theme .total-price .value {
+            color: var(--image-text-main) !important;
+        }
+        .image-export-theme .total-price .value {
+           font-weight: bold;
+        }
+
+        .image-export-theme .total-price.grand-total { /* Grand total row */
+            background: var(--image-text-main) !important; /* Black background */
+            border-color: #000000 !important;
+        }
+        .image-export-theme .total-price.grand-total .label,
+        .image-export-theme .total-price.grand-total .value {
+            color: var(--image-bg-light) !important; /* White text */
+        }
+        .image-export-theme .note {
+           background-color: #f9f9f9 !important;
+           border-color: var(--image-card-border-light) !important;
+        }
+        .image-export-theme .info-grid { /* This ensures 2 columns for the image */
+           grid-template-columns: repeat(2, 1fr) !important;
+           gap: 10px !important; /* Adjust gap for image */
+        }
+
+
+        /* ==== Mobile Optimizations ==== */
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .container {
+                gap: 15px;
+                max-width: 100%;
+            }
+
+            .card {
+                padding: 18px 15px;
+                border-radius: 16px;
+            }
+
+            header {
+                margin-bottom: 20px;
+            }
+             .language-switcher {
+                top: -5px;
+                right: 5px;
+            }
+            .language-switcher button {
+                padding: 5px 8px;
+                font-size: 11px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 4px;
+            }
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: stretch;
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                flex-basis: auto;
+                margin-right: 0;
+                margin-bottom: 8px;
+                padding-top: 0;
+                text-align: left;
+                font-size: 14px;
+            }
+            .form-group label i {
+                font-size: 14px;
+                margin-right: 6px;
+                width: 14px;
+            }
+
+            input, select {
+                padding: 15px;
+                font-size: 15px;
+                border-radius: 8px;
+            }
+             .input-wrapper::after {
+                right: 15px;
+                font-size: 11px;
+            }
+
+            .form-group > input,
+            .form-group > select {
+                width: 100%;
+            }
+
+            .btn {
+                padding: 15px;
+                font-size: 15px;
+                border-radius: 8px;
+            }
+
+            #calculateBtn {
+                margin-top: 25px;
+            }
+
+
+            .info-grid { /* Default for live view on small screens */
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin: 15px 0;
+            }
+            .info-card { /* Default for live view on small screens */
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 14px;
+            }
+             .info-grid { /* Default for live view on small screens */
+                 grid-template-columns: 1fr;
+                 gap: 10px;
+                 margin: 15px 0;
+             }
+             .info-card { /* Default for live view on small screens */
+                 flex-direction: column;
+                 align-items: flex-start;
+                 padding: 14px;
+             }
+             .info-card h3 { /* Default for live view on small screens */
+                 font-size: 13px;
+                 margin-bottom: 5px;
+                 color: var(--text-medium);
+             }
+             .info-card p { /* Default for live view on small screens */
+                 font-size: 15px;
+                 text-align: left;
+                 color: var(--primary);
+             }
+
+             .price-details h3 {
+                 font-size: 16px;
+                 margin-bottom: 12px;
+             }
+             .price-item {
+                 padding: 10px 0;
+             }
+             .price-item .label, .price-item .value {
+                 font-size: 13px;
+             }
+
+             .total-price {
+                 padding: 14px;
+             }
+             .total-price .label {
+                 font-size: 15px;
+             }
+             .total-price .value {
+                 font-size: 20px;
+             }
+             .note {
+                 font-size: 11px;
+                 padding: 14px;
+                 margin-top: 18px;
+             }
+             .note-title {
+                 font-size: 12px;
+             }
+
+             .actions {
+                 margin-top: 20px;
+                 gap: 10px;
+             }
+             .main-actions {
+                  flex-direction: column;
+             }
+             .download-options {
+                 flex-wrap: wrap;
+             }
+             .download-options button {
+                 padding: 7px 10px;
+                 font-size: 12px;
+             }
+         }
+
+
+         /* Animations */
+         @keyframes fadeIn {
+             from { opacity: 0; transform: translateY(10px); }
+             to { opacity: 1; transform: translateY(0); }
+         }
+
+         .fade-in {
+             animation: fadeIn 0.5s ease forwards;
+         }
+
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <div class="card fade-in">
+             <header>
+    <div class="logo-container">
+        <div class="logo-placeholder"></div>
+        <div class="company-info">
+            <h1 data-lang-key="mainTitle">客户专享报价工具</h1>
+            <div class="subtitle" data-lang-key="mainSubtitle">Exclusive for Clients</div>
+        </div>
+    </div>
+    <div class="language-switcher">
+        <button id="lang-zh" class="active" onclick="setPageLanguage('zh')"><i class="fas fa-language"></i> 中文</button>
+        <button id="lang-en" onclick="setPageLanguage('en')"><i class="fas fa-language"></i> EN</button>
+    </div>
+</header>
+
+             <!-- Customer Information -->
+             <div class="form-group">
+                 <label for="customerName"><i class="fas fa-user"></i> <span data-lang-key="customerNameLabel">客户名称</span></label>
+                 <input type="text" id="customerName" data-lang-key-placeholder="customerNamePlaceholder" placeholder="请输入客户名称" required>
+             </div>
+
+             <div class="form-group">
+                 <label for="contactInfo"><i class="fas fa-phone-alt"></i> <span data-lang-key="contactInfoLabel">联系方式</span></label>
+                 <input type="text" id="contactInfo" data-lang-key-placeholder="contactInfoPlaceholder" placeholder="请输入联系电话" required>
+             </div>
+
+             <!-- Order Details -->
+             <div class="form-group">
+                 <label for="orderCategory"><i class="fas fa-clipboard-list"></i> <span data-lang-key="orderCategoryLabel">订单类型</span></label>
+                 <div class="input-wrapper">
+                     <select id="orderCategory" required>
+                         <option value="" data-lang-key="selectOrderCategory">请选择订单类型</option>
+                         <option value="样品订单" data-lang-key="sampleOrder">样品订单</option>
+                         <option value="量产订单" data-lang-key="massProductionOrder">量产订单</option>
+                     </select>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 <label for="type"><i class="fas fa-shapes"></i> <span data-lang-key="buttonTypeLabel">钮扣类型</span></label>
+                  <div class="input-wrapper">
+                     <select id="type" required onchange="updateAvailableThicknesses()">
+                         <option value="" data-lang-key="selectButtonType">请选择钮扣类型</option>
+                         <option value="磁钮" data-lang-key="magneticButton">磁钮</option>
+                         <option value="月光" data-lang-key="moonlightButton">月光</option>
+                         <option value="珠光" data-lang-key="pearlButton">珠光</option>
+                         <option value="混色散花" data-lang-key="mixedColorButton">混色散花</option>
+                         <option value="彩虹钮" data-lang-key="rainbowButton">彩虹钮</option>
+                         <option value="棍花钮" data-lang-key="stickPatternButton">棍花钮</option>
+                     </select>
+                 </div>
+             </div>
+
+             <!-- NEW: Size Modification -->
+             <div class="form-group">
+                 <label for="sizeModification"><i class="fas fa-arrows-alt-h"></i> <span data-lang-key="sizeModificationLabel">尺寸修改</span></label>
+                 <div class="input-wrapper">
+                     <select id="sizeModification">
+                         <option value="none" data-lang-key="noChange">无需更改</option>
+                         <option value="smallToLarge" data-lang-key="smallToLarge">小改大</option>
+                         <option value="largeToSmall" data-lang-key="largeToSmall">大改小</option>
+                     </select>
+                 </div>
+             </div>
+
+             <!-- RENAMED: Button-making Department (formerly Craftsmanship) -->
+             <div class="form-group">
+                 <label for="sizeType"><i class="fas fa-industry"></i> <span data-lang-key="buttonMakingDeptLabel">制钮部门</span></label>
+                 <div class="input-wrapper">
+                     <select id="sizeType" required onchange="toggleButtonSizeInputs()">
+                         <option value="" data-lang-key="selectButtonMakingDept">请选择制钮部门</option>
+                         <option value="tube" data-lang-key="tubeProcess">棍花</option>
+                         <option value="punch" data-lang-key="punchProcess">片桶</option>
+                     </select>
+                 </div>
+             </div>
+
+             <!-- NEW: Button-making Craftsmanship -->
+             <div class="form-group">
+                 <label for="buttonCraftsmanship"><i class="fas fa-ring"></i> <span data-lang-key="buttonCraftsmanshipLabel">制钮工艺</span></label>
+                 <div class="input-wrapper">
+                     <select id="buttonCraftsmanship">
+                         <option value="none" data-lang-key="noButtonCraftsmanship">无需工艺</option>
+                         <option value="fishEye" data-lang-key="fishEye">鱼眼</option>
+                         <option value="canal" data-lang-key="canal">运河</option>
+                     </select>
+                 </div>
+             </div>
+
+
+             <div class="form-group toggle-row" id="tubeSizeRow">
+                 <label for="tubeButtonSize"><i class="fas fa-ruler"></i> <span data-lang-key="tubeSizeLabel">棍花尺寸</span></label>
+                 <div class="input-wrapper">
+                     <select id="tubeButtonSize" onchange="updateAvailableThicknesses()" disabled>
+                         <option value="" data-lang-key="selectTubeSize">请选择棍花尺寸</option>
+                     </select>
+                 </div>
+             </div>
+
+             <div class="form-group toggle-row" id="punchSizeRow">
+                 <label for="punchButtonSize"><i class="fas fa-ruler"></i> <span data-lang-key="punchSizeLabel">片桶尺寸</span></label>
+                 <div class="input-wrapper">
+                     <select id="punchButtonSize" onchange="updateAvailableThicknesses()">
+                         <option value="" data-lang-key="selectPunchSize">请选择片桶尺寸</option>
+                     </select>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 <label for="quantity"><i class="fas fa-boxes"></i> <span data-lang-key="quantityLabel">订单数量 (G)</span></label>
+                 <input type="number" id="quantity" min="1" value="100" required>
+             </div>
+
+             <div class="form-group">
+                 <label for="thickness"><i class="fas fa-ruler-combined"></i> <span data-lang-key="thicknessLabel">成品厚度 (mm)</span></label>
+                 <div class="input-wrapper">
+                     <select id="thickness" required>
+                         <option value="" data-lang-key="selectThickness">请选择厚度</option>
+                     </select>
+                 </div>
+             </div>
+
+             <!-- Additional Options Section -->
+             <div class="toggle-section">
+                 <!-- NEW: Material Synergy -->
+                 <div class="form-group">
+                     <label for="materialSynergy"><i class="fas fa-atom"></i> <span data-lang-key="materialSynergyLabel">材料协同</span></label>
+                     <div class="input-wrapper">
+                         <select id="materialSynergy">
+                             <option value="none" data-lang-key="noMaterialSynergy">无需添加</option>
+                             <option value="silverPowder" data-lang-key="silverPowder">银粉</option>
+                         </select>
+                     </div>
+                 </div>
+
+                 <div class="form-group">
+                     <label for="laserOption"><i class="fas fa-bolt"></i> <span data-lang-key="laserOptionLabel">镭射选项</span></label>
+                     <div class="input-wrapper">
+                         <select id="laserOption">
+                             <option value="none" data-lang-key="noLaser">不需要镭射</option>
+                             <option value="surfaceLetter" data-lang-key="surfaceLetterLaser">射面字母</option>
+                             <option value="sideEdge" data-lang-key="sideEdgeLaser">侧边镭射</option>
+                         </select>
+                         </div>
+                 </div>
+
+                 <div class="form-group">
+                     <label for="obliqueOption"><i class="fas fa-cogs"></i> <span data-lang-key="obliqueOptionLabel">斜车选项</span></label>
+                     <div class="input-wrapper">
+                         <select id="obliqueOption">
+                             <option value="no" data-lang-key="noOblique">不需要斜车</option>
+                             <option value="yes" data-lang-key="yesOblique">需要斜车</option>
+                         </select>
+                         </div>
+                 </div>
+
+                 <div class="form-group">
+                     <label for="oilOption"><i class="fas fa-oil-can"></i> <span data-lang-key="oilOptionLabel">泡油选项</span></label>
+                     <div class="input-wrapper">
+                         <select id="oilOption">
+                             <option value="no" data-lang-key="noOil">不需要泡油</option>
+                             <option value="yes" data-lang-key="yesOil">需要泡油</option>
+                         </select>
+                         </div>
+                 </div>
+             </div>
+
+             <button class="btn" id="calculateBtn" onclick="calculatePrice()">
+                 <i class="fas fa-calculator btn-icon"></i>
+                 <span class="btn-text" data-lang-key="calculateButtonText">计算总价</span>
+                 <i class="fas fa-spinner loading-spinner"></i>
+             </button>
+         </div>
+
+         <div class="card" id="result">
+             <div class="result-header">
+                 <div class="company-title" data-lang-key="companyName">合盛辅料</div>
+                 <div class="company-subtitle" data-lang-key="companySubtitleEn">Cosun Trimmings</div>
+                 <div class="customer-info" id="resultCustomer"><span data-lang-key="customerLabel">客户</span>：<span data-lang-key="notProvided">未提供</span></div>
+                 <div class="date-quote" id="resultDate"><span data-lang-key="quoteDateLabel">日期</span>：<span data-lang-key="notProvided">未提供</span></div>
+             </div>
+
+             <div class="info-grid">
+                 <div class="info-card">
+                     <h3 data-lang-key="resultOrderTypeLabel">订单类型</h3>
+                     <p id="resultOrderType" data-lang-key-value="orderCategory">未提供</p>
+                 </div>
+                 <div class="info-card">
+                     <h3 data-lang-key="resultButtonTypeLabel">钮扣类型</h3>
+                     <p id="resultButtonType" data-lang-key-value="buttonType">未提供</p>
+                 </div>
+                 <div class="info-card">
+                     <h3 data-lang-key="resultButtonMakingDeptLabel">制钮部门</h3>
+                     <p id="resultButtonMakingDept" data-lang-key-value="buttonMakingDept">未提供</p>
+                 </div>
+                 <div class="info-card">
+                     <h3 data-lang-key="resultQuantityLabel">订单数量</h3>
+                     <p id="resultQuantity" class="value">未提供</p>
+                 </div>
+                 <div class="info-card">
+                     <h3 data-lang-key="resultSizeModificationLabel">尺寸修改</h3>
+                     <p id="resultSizeModification" data-lang-key-value="sizeModification">未提供</p>
+                 </div>
+                 <div class="info-card">
+                     <h3 data-lang-key="resultButtonCraftsmanshipLabel">制钮工艺</h3>
+                     <p id="resultButtonCraftsmanship" data-lang-key-value="buttonCraftsmanship">未提供</p>
+                 </div>
+                 <div class="info-card">
+                     <h3 data-lang-key="resultMaterialSynergyLabel">材料协同</h3>
+                     <p id="resultMaterialSynergy" data-lang-key-value="materialSynergy">未提供</p>
+                 </div>
+             </div>
+
+<div class="price-details">
+    <div class="price-item">
+        <span class="label" data-lang-key="basePriceLabel">基础单价</span>
+        <span class="value" id="basePrice">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="price-item">
+        <span class="label" data-lang-key="thicknessAdjLabel">厚度调整</span>
+        <span class="value" id="thicknessAdj">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="price-item">
+        <span class="label" data-lang-key="sizeModificationCostLabel">尺寸修改成本</span>
+        <span class="value" id="sizeModificationCost">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="price-item">
+        <span class="label" data-lang-key="buttonCraftsmanshipCostLabel">制钮工艺成本</span>
+        <span class="value" id="buttonCraftsmanshipCost">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="price-item">
+        <span class="label" data-lang-key="obliqueCostLabel">斜车成本</span>
+        <span class="value" id="obliqueCost">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="price-item">
+        <span class="label" data-lang-key="laserCostLabel">镭射成本</span>
+        <span class="value" id="laserCost">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="price-item">
+        <span class="label" data-lang-key="materialSynergyCostLabel">材料协同成本</span>
+        <span class="value" id="materialSynergyCost">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="price-item">
+        <span class="label" data-lang-key="oilCostLabel">泡油成本</span>
+        <span class="value" id="oilCost">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="total-price">
+        <span class="label" data-lang-key="unitPriceLabel">合计单价</span>
+        <span class="value" id="unitPrice">0.00 <span data-lang-key="currencyUnitG">元/G</span></span>
+    </div>
+    <div class="total-price grand-total" style="margin-top: 10px;">
+        <span class="label" data-lang-key="totalPriceLabel">总价</span>
+        <span class="value" id="totalPrice">0.00 <span data-lang-key="currencyUnit">元</span></span>
+    </div>
+</div>
+
+
+                 <div class="note">
+                     <div class="note-title" data-lang-key="importantNoteTitle">重要提示</div>
+                     <p data-lang-key="importantNoteTextZh">尊敬的客户：您好！感谢您对我们的关注与支持。在此温馨提示，线上所展示价格明细均为合盛知识库首次为您估算，仅供参考，如有任何疑问或需要进一步确认具体报价，请与您专属销售顾问联系。感谢您的理解与配合！祝商祺！</p>
+                     <p style="margin-top: 10px;" data-lang-key="importantNoteTextEn">Dear Customer, Hello! Thank you for your attention and support. We would like to kindly remind you that the price details displayed online are initial estimates provided by the Hesheng Knowledge Base for your reference only. If you have any questions or need to further confirm specific quotations, please contact your dedicated sales consultant. Thank you for your understanding and cooperation! Best regards!</p>
+                 </div>
+
+                 <div class="actions">
+                     <div class="download-options">
+                         <button id="download-zh-btn" class="active" onclick="setDownloadLanguage('zh')">
+                             <i class="fas fa-file-alt"></i> <span data-lang-key="downloadAsZh">下载中文报价单</span>
+                         </button>
+                         <button id="download-en-btn" onclick="setDownloadLanguage('en')">
+                             <i class="fas fa-file-alt"></i> <span data-lang-key="downloadAsEn">下载英文报价单</span>
+                         </button>
+                     </div>
+                     <div class="main-actions">
+                         <button class="btn" id="downloadBtn" onclick="downloadResultImage()">
+                             <i class="fas fa-download btn-icon"></i>
+                             <span class="btn-text" data-lang-key="downloadButtonText">下载报价单</span>
+                             <i class="fas fa-spinner loading-spinner"></i>
+                         </button>
+                         <button class="btn btn-secondary" onclick="resetForm()">
+                              <i class="fas fa-redo btn-icon"></i>
+                              <span class="btn-text" data-lang-key="resetButtonText">重新计算</span>
+                              <i class="fas fa-spinner loading-spinner"></i>
+                         </button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <script>
+         // --- Language Translation Data ---
+         const translations = {
+             zh: {
+                 pageTitle: "合盛辅料 - 客户专享报价工具",
+                 mainTitle: "客户专享报价工具",
+                 mainSubtitle: "Exclusive for Clients",
+                 customerNameLabel: "客户名称",
+                 customerNamePlaceholder: "请输入客户名称",
+                 contactInfoLabel: "联系方式",
+                 contactInfoPlaceholder: "请输入联系电话",
+                 orderCategoryLabel: "订单类型",
+                 selectOrderCategory: "请选择订单类型",
+                 sampleOrder: "样品订单",
+                 massProductionOrder: "量产订单",
+                 buttonTypeLabel: "钮扣类型",
+                 selectButtonType: "请选择钮扣类型",
+                 magneticButton: "磁钮",
+                 moonlightButton: "月光",
+                 pearlButton: "珠光",
+                 mixedColorButton: "混色散花",
+                 rainbowButton: "彩虹钮",
+                 stickPatternButton: "棍花钮",
+                 sizeModificationLabel: "尺寸修改",
+                 noChange: "无需更改",
+                 smallToLarge: "小改大",
+                 largeToSmall: "大改小",
+                 buttonMakingDeptLabel: "制钮部门",
+                 selectButtonMakingDept: "请选择制钮部门",
+                 tubeProcess: "棍花",
+                 punchProcess: "片桶",
+                 buttonCraftsmanshipLabel: "制钮工艺",
+                 noButtonCraftsmanship: "无需工艺",
+                 fishEye: "鱼眼",
+                 canal: "运河",
+                 tubeSizeLabel: "棍花尺寸",
+                 selectTubeSize: "请选择棍花尺寸",
+                 punchSizeLabel: "片桶尺寸",
+                 selectPunchSize: "请选择片桶尺寸",
+                 quantityLabel: "订单数量 (G)",
+                 thicknessLabel: "成品厚度 (mm)",
+                 selectThickness: "请选择厚度",
+                 materialSynergyLabel: "材料协同",
+                 noMaterialSynergy: "无需添加",
+                 silverPowder: "银粉",
+                 laserOptionLabel: "镭射选项",
+                 noLaser: "不需要镭射",
+                 surfaceLetterLaser: "射面字母",
+                 sideEdgeLaser: "侧边镭射",
+                 obliqueOptionLabel: "斜车选项",
+                 noOblique: "不需要斜车",
+                 yesOblique: "需要斜车",
+                 oilOptionLabel: "泡油选项",
+                 noOil: "不需要泡油",
+                 yesOil: "需要泡油",
+                 calculateButtonText: "计算总价",
+                 companyName: "合盛辅料",
+                 companySubtitleEn: "Cosun Trimmings",
+                 customerLabel: "客户",
+                 quoteDateLabel: "报价日期",
+                 notProvided: "未提供",
+                 resultOrderTypeLabel: "订单类型",
+                 resultButtonTypeLabel: "钮扣类型",
+                 resultButtonMakingDeptLabel: "制钮部门",
+                 resultQuantityLabel: "订单数量",
+                 resultSizeModificationLabel: "尺寸修改",
+                 resultButtonCraftsmanshipLabel: "制钮工艺",
+                 resultMaterialSynergyLabel: "材料协同",
+                 priceDetailsTitle: "价格明细",
+                 basePriceLabel: "基础单价",
+                 thicknessAdjLabel: "厚度调整",
+                 sizeModificationCostLabel: "尺寸修改成本",
+                 buttonCraftsmanshipCostLabel: "制钮工艺成本",
+                 obliqueCostLabel: "斜车成本",
+                 laserCostLabel: "镭射成本",
+                 materialSynergyCostLabel: "材料协同成本",
+                 oilCostLabel: "泡油成本",
+                 unitPriceLabel: "合计单价",
+                 totalPriceLabel: "总价",
+                 currencyUnitG: "元/G",
+                 currencyUnit: "元",
+                 importantNoteTitle: "重要提示",
+                 importantNoteTextZh: "尊敬的客户：您好！感谢您对我们的关注与支持。在此温馨提示，线上所展示价格明细均为合盛知识库首次为您估算，仅供参考，如有任何疑问或需要进一步确认具体报价，请与您专属销售顾问联系。感谢您的理解与配合！祝商祺！",
+                 importantNoteTextEn: "Dear Customer, Hello! Thank you for your attention and support. We would like to kindly remind you that the price details displayed online are initial estimates provided by the Hesheng Knowledge Base for your reference only. If you have any questions or need to further confirm specific quotations, please contact your dedicated sales consultant. Thank you for your understanding and cooperation! Best regards!",
+                 downloadButtonText: "下载当前语言报价单",
+                 resetButtonText: "重新计算",
+                 alertFillAllFields: "请填写所有必填项（客户名称、联系方式、订单类型、钮扣类型、制钮部门、钮扣尺寸、订单数量、厚度），并确保订单数量和厚度为有效正数。",
+                 alertInvalidData: "选择的钮扣尺寸 ({buttonLSize}) 或类型 ({type}) 数据不存在，请检查。",
+                 alertImageGenerationFailed: "生成报价单图片失败，请检查控制台获取更多信息。",
+                 alertImageEmpty: "生成报价单图片失败：图片数据为空。",
+                 standardThicknessSuffix: " (标准)",
+                 standardThicknessSuffixEn: " (Standard)",
+                 customerInfoSeparator: " | 联系方式：",
+                 customerInfoSeparatorEn: " | Contact: ",
+                 quoteDatePrefix: "报价日期：",
+                 quoteDatePrefixEn: "Quote Date: ",
+                 processTubeLabelEn: "Stick Pattern",
+                 processPunchLabelEn: "Sheet Barrel",
+                 downloadAsZh: "下载中文报价单",
+                 downloadAsEn: "下载英文报价单",
+                 downloadButtonTextDynamic: "下载{lang}报价单",
+                 filenameZh: "合作共赢.静候佳音.jpeg",
+                 filenameEn: "Win-Win_Cooperation.Looking_Forward.jpeg"
+             },
+             en: {
+                 pageTitle: "Cosun Trimmings - Client Quotation Tool",
+                 mainTitle: "Client Quotation Tool",
+                 mainSubtitle: "Exclusive for Clients",
+                 customerNameLabel: "Client Name",
+                 customerNamePlaceholder: "Enter client name",
+                 contactInfoLabel: "Contact Info",
+                 contactInfoPlaceholder: "Enter contact phone",
+                 orderCategoryLabel: "Order Type",
+                 selectOrderCategory: "Select order type",
+                 sampleOrder: "Sample Order",
+                 massProductionOrder: "Mass Production Order",
+                 buttonTypeLabel: "Button Type",
+                 selectButtonType: "Select button type",
+                 magneticButton: "Magnetic Button",
+                 moonlightButton: "Moonlight Button",
+                 pearlButton: "Pearl Button",
+                 mixedColorButton: "Mixed Color Button",
+                 rainbowButton: "Rainbow Button",
+                 stickPatternButton: "Stick Pattern Button",
+                 sizeModificationLabel: "Size Modification",
+                 noChange: "No Change",
+                 smallToLarge: "Small to Large",
+                 largeToSmall: "Large to Small",
+                 buttonMakingDeptLabel: "Button Dept.",
+                 selectButtonMakingDept: "Select Button Dept.",
+                 tubeProcess: "Stick Pattern",
+                 punchProcess: "Sheet Barrel",
+                 buttonCraftsmanshipLabel: "Button Craft",
+                 noButtonCraftsmanship: "No Craft Needed",
+                 fishEye: "Fish Eye",
+                 canal: "Canal",
+                 tubeSizeLabel: "Stick Pattern Size",
+                 selectTubeSize: "Select stick pattern size",
+                 punchSizeLabel: "Sheet Barrel Size",
+                 selectPunchSize: "Select sheet barrel size",
+                 quantityLabel: "Order Quantity (G)",
+                 thicknessLabel: "Finished Thickness (mm)",
+                 selectThickness: "Select thickness",
+                 materialSynergyLabel: "Material Synergy",
+                 noMaterialSynergy: "No Addition",
+                 silverPowder: "Silver Powder",
+                 laserOptionLabel: "Laser Option",
+                 noLaser: "No Laser Needed",
+                 surfaceLetterLaser: "Surface Letter Laser",
+                 sideEdgeLaser: "Side Edge Laser",
+                 obliqueOptionLabel: "Oblique Option",
+                 noOblique: "No Oblique Needed",
+                 yesOblique: "Oblique Needed",
+                 oilOptionLabel: "Oil Option",
+                 noOil: "No Oil Needed",
+                 yesOil: "Oil Needed",
+                 calculateButtonText: "Calculate Total",
+                 companyName: "Cosun Trimmings",
+                 companySubtitleEn: "Cosun Trimmings",
+                 customerLabel: "Client",
+                 quoteDateLabel: "Quote Date",
+                 notProvided: "Not Provided",
+                 resultOrderTypeLabel: "Order Type",
+                 resultButtonTypeLabel: "Button Type",
+                 resultButtonMakingDeptLabel: "Button Dept.",
+                 resultQuantityLabel: "Order Quantity",
+                 resultSizeModificationLabel: "Size Modification",
+                 resultButtonCraftsmanshipLabel: "Button Craft",
+                 resultMaterialSynergyLabel: "Material Synergy",
+                 priceDetailsTitle: "Price Details",
+                 basePriceLabel: "Base Unit Price",
+                 thicknessAdjLabel: "Thickness Adj.",
+                 sizeModificationCostLabel: "Size Mod. Cost",
+                 buttonCraftsmanshipCostLabel: "Button Craft Cost",
+                 obliqueCostLabel: "Oblique Cost",
+                 laserCostLabel: "Laser Cost",
+                 materialSynergyCostLabel: "Material Syn. Cost",
+                 oilCostLabel: "Oil Cost",
+                 unitPriceLabel: "Total Unit Price",
+                 totalPriceLabel: "Total Price",
+                 currencyUnitG: " CNY/G",
+                 currencyUnit: " CNY",
+                 importantNoteTitle: "Important Note",
+                 importantNoteTextZh: "尊敬的客户：您好！感谢您对我们的关注与支持。在此温馨提示，线上所展示价格明细均为合盛知识库首次为您估算，仅供参考，如有任何疑问或需要进一步确认具体报价，请与您专属销售顾问联系。感谢您的理解与配合！祝商祺！",
+                 importantNoteTextEn: "Dear Customer, Hello! Thank you for your attention and support. We would like to kindly remind you that the price details displayed online are initial estimates provided by the Hesheng Knowledge Base for your reference only. If you have any questions or need to further confirm specific quotations, please contact your dedicated sales consultant. Thank you for your understanding and cooperation! Best regards!",
+                 downloadButtonText: "Download Current Language Quote",
+                 resetButtonText: "Reset",
+                 alertFillAllFields: "Please fill in all required fields (Client Name, Contact Info, Order Type, Button Type, Button Dept., Button Size, Order Quantity, Thickness) and ensure quantity and thickness are valid positive numbers.",
+                 alertInvalidData: "Data for selected button size ({buttonLSize}) or type ({type}) not found. Please check.",
+                 alertImageGenerationFailed: "Failed to generate quote image. Please check the console for more information.",
+                 alertImageEmpty: "Failed to generate quote image: Image data is empty.",
+                 standardThicknessSuffix: " (Standard)",
+                 standardThicknessSuffixEn: " (Standard)",
+                 customerInfoSeparator: " | Contact: ",
+                 customerInfoSeparatorEn: " | Contact: ",
+                 quoteDatePrefix: "Quote Date: ",
+                 quoteDatePrefixEn: "Quote Date: ",
+                 processTubeLabelEn: "Stick Pattern",
+                 processPunchLabelEn: "Sheet Barrel",
+                 downloadAsZh: "Download Chinese Quote",
+                 downloadAsEn: "Download English Quote",
+                 downloadButtonTextDynamic: "Download {lang} Quote",
+                 filenameZh: "合作共赢.静候佳音.jpeg",
+                 filenameEn: "Win-Win_Cooperation.Looking_Forward.jpeg"
+             }
+         };
+
+         let currentPageLanguage = localStorage.getItem('calculatorPageLanguage') || 'zh';
+         let preferredDownloadLanguage = localStorage.getItem('calculatorDownloadLanguage') || 'zh';
+
+         function applyTranslations(lang, targetElement = document) {
+             targetElement.querySelectorAll('[data-lang-key]').forEach(el => {
+                 const key = el.getAttribute('data-lang-key');
+                 if (translations[lang] && translations[lang][key]) {
+                     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                         const placeholderKey = el.getAttribute('data-lang-key-placeholder');
+                         if (placeholderKey && translations[lang][placeholderKey]) {
+                              el.placeholder = translations[lang][placeholderKey];
+                         } else if(el.placeholder) {
+                              el.placeholder = translations[lang][key];
+                         }
+                     } else if (el.tagName === 'OPTION' && el.value === "") {
+                         el.textContent = translations[lang][key];
+                     } else if (el.tagName === 'OPTION') {
+                         const optionKey = el.dataset.langKey;
+                         el.textContent = (optionKey && translations[lang][optionKey]) ? translations[lang][optionKey] : (translations[lang][key] || el.value) ;
+                     }
+                      else {
+                         el.textContent = translations[lang][key];
+                     }
+                 }
+             });
+             targetElement.querySelectorAll('[data-lang-key-placeholder]').forEach(el => {
+                 const key = el.getAttribute('data-lang-key-placeholder');
+                  if (translations[lang] && translations[lang][key]) {
+                     el.placeholder = translations[lang][key];
+                 }
+             });
+
+             const downloadBtnTextEl = document.querySelector('#downloadBtn .btn-text');
+             if (downloadBtnTextEl) {
+                 let dynamicTextKey = translations[currentPageLanguage].downloadButtonTextDynamic;
+                 let langName = preferredDownloadLanguage === 'zh' ? (currentPageLanguage === 'zh' ? '中文' : 'Chinese') : (currentPageLanguage === 'en' ? 'English' : '英文');
+                 downloadBtnTextEl.textContent = dynamicTextKey.replace('{lang}', langName);
+             }
+         }
+
+
+         function setPageLanguage(lang) {
+             currentPageLanguage = lang;
+             localStorage.setItem('calculatorPageLanguage', lang);
+             document.documentElement.lang = lang;
+
+             applyTranslations(lang);
+
+             if (translations[lang] && translations[lang]['pageTitle']) {
+                 document.title = translations[lang]['pageTitle'];
+             }
+
+             document.getElementById('lang-zh').classList.toggle('active', lang === 'zh');
+             document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+
+             populateLSizeOptions(document.getElementById('tubeButtonSize'), combinedLSizes, translations[currentPageLanguage].selectTubeSize);
+             populateLSizeOptions(document.getElementById('punchButtonSize'), combinedLSizes, translations[currentPageLanguage].selectPunchSize);
+             document.querySelector('#sizeModification option[value="none"]').textContent = translations[currentPageLanguage].noChange;
+             document.querySelector('#buttonCraftsmanship option[value="none"]').textContent = translations[currentPageLanguage].noButtonCraftsmanship;
+             document.querySelector('#materialSynergy option[value="none"]').textContent = translations[currentPageLanguage].noMaterialSynergy;
+
+
+             updateAvailableThicknesses();
+             if (document.getElementById('result').classList.contains('has-content')) {
+                 calculatePrice();
+             }
+         }
+
+         function setDownloadLanguage(lang) {
+             preferredDownloadLanguage = lang;
+             localStorage.setItem('calculatorDownloadLanguage', lang);
+             document.getElementById('download-zh-btn').classList.toggle('active', lang === 'zh');
+             document.getElementById('download-en-btn').classList.toggle('active', lang === 'en');
+             applyTranslations(currentPageLanguage);
+         }
+
+         const buttonData = { // Same button data as before
+            "12L": { standardThickness: 2.4, types: { "磁钮": 2.75, "月光": 2.97, "珠光": 2.97, "混色散花": 3.52, "彩虹钮": 4.40, "棍花钮": 3.74 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 0.90, laserSideEdge: 3.50 },
+            "13L": { standardThickness: 2.4, types: { "磁钮": 2.75, "月光": 2.97, "珠光": 2.97, "混色散花": 3.52, "彩虹钮": 4.40, "棍花钮": 3.74 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 0.90, laserSideEdge: 3.50 },
+            "14L": { standardThickness: 2.4, types: { "磁钮": 2.75, "月光": 2.97, "珠光": 2.97, "混色散花": 3.52, "彩虹钮": 4.40, "棍花钮": 3.74 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 0.90, laserSideEdge: 3.50 },
+            "15L": { standardThickness: 2.4, types: { "磁钮": 2.75, "月光": 2.97, "珠光": 2.97, "混色散花": 3.52, "彩虹钮": 4.40, "棍花钮": 3.74 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 0.90, laserSideEdge: 3.50 },
+            "16L": { standardThickness: 2.4, types: { "磁钮": 2.75, "月光": 2.97, "珠光": 2.97, "混色散花": 3.52, "彩虹钮": 4.40, "棍花钮": 3.74 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 0.90, laserSideEdge: 3.50 },
+            "17L": { standardThickness: 2.4, types: { "磁钮": 2.75, "月光": 2.97, "珠光": 2.97, "混色散花": 3.52, "彩虹钮": 4.40, "棍花钮": 3.74 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 0.90, laserSideEdge: 3.50 },
+            "18L": { standardThickness: 2.4, types: { "磁钮": 2.75, "月光": 2.97, "珠光": 2.97, "混色散花": 3.52, "彩虹钮": 4.40, "棍花钮": 3.74 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 0.90, laserSideEdge: 3.50 },
+            "19L": { standardThickness: 2.6, types: { "磁钮": 3.30, "月光": 3.52, "珠光": 3.52, "混色散花": 4.18, "彩虹钮": 6.05, "棍花钮": 4.51 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 1.00, laserSideEdge: 3.50 },
+            "20L": { standardThickness: 2.6, types: { "磁钮": 3.30, "月光": 3.52, "珠光": 3.52, "混色散花": 4.18, "彩虹钮": 6.05, "棍花钮": 4.51 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 1.00, laserSideEdge: 3.50 },
+            "22L": { standardThickness: 2.8, types: { "磁钮": 4.40, "月光": 4.84, "珠光": 4.95, "混色散花": 4.95, "彩虹钮": 7.48, "棍花钮": 5.50 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 1.20, laserSideEdge: 3.50 },
+            "24L": { standardThickness: 3.0, types: { "磁钮": 5.06, "月光": 5.50, "珠光": 5.72, "混色散花": 5.72, "彩虹钮": 8.25, "棍花钮": 6.49 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 1.50, laserSideEdge: 4.00 },
+            "26L": { standardThickness: 3.1, types: { "磁钮": 5.83, "月光": 6.38, "珠光": 7.48, "混色散花": 7.48, "彩虹钮": 9.35, "棍花钮": 8.03 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 1.80, laserSideEdge: 4.00 },
+            "27L": { standardThickness: 3.1, types: { "磁钮": 6.60, "月光": 9.90, "珠光": 10.95, "混色散花": 10.45, "彩虹钮": 9.02, "棍花钮": 9.02 }, obliquePriceRatio: 1.3, laserSurfaceLetter: 2.00, laserSideEdge: 4.00 },
+            "28L": { standardThickness: 3.2, types: { "磁钮": 7.48, "月光": 8.25, "珠光": 9.13, "混色散花": 9.13, "彩虹钮": 12.10, "棍花钮": 10.01}, obliquePriceRatio: 1.4, laserSurfaceLetter: 2.20, laserSideEdge: 4.50 },
+            "30L": { standardThickness: 3.3, types: { "磁钮": 8.25, "月光": 9.02, "珠光": 10.45, "混色散花": 10.45, "彩虹钮": 13.20, "棍花钮": 11.00}, obliquePriceRatio: 1.4, laserSurfaceLetter: 2.80, laserSideEdge: 4.50 },
+            "32L": { standardThickness: 3.5, types: { "磁钮": 9.35, "月光": 10.45, "珠光": 11.88, "混色散花": 11.88, "彩虹钮": 15.60, "棍花钮": 13.20}, obliquePriceRatio: 1.4, laserSurfaceLetter: 3.20, laserSideEdge: 5.00 },
+            "34L": { standardThickness: 3.6, types: { "磁钮": 11.55,"月光": 12.65, "珠光": 13.75, "混色散花": 13.75, "彩虹钮": 17.25, "棍花钮": 16.50}, obliquePriceRatio: 1.4, laserSurfaceLetter: 4.00, laserSideEdge: 5.00 },
+            "36L": { standardThickness: 3.8, types: { "磁钮": 13.20,"月光": 14.30, "珠光": 15.95, "混色散花": 15.95, "彩虹钮": 24.20, "棍花钮": 17.60}, obliquePriceRatio: 1.4, laserSurfaceLetter: 4.20, laserSideEdge: 6.50 },
+            "38L": { standardThickness: 4.0, types: { "磁钮": 18.15,"月光": 19.80, "珠光": 20.90, "混色散花": 20.90, "彩虹钮": 33.00, "棍花钮": 20.90}, obliquePriceRatio: 1.5, laserSurfaceLetter: 4.50, laserSideEdge: 9.00 },
+            "40L": { standardThickness: 4.2, types: { "磁钮": 19.80,"月光": 21.45, "珠光": 22.00, "混色散花": 22.00, "彩虹钮": 35.20, "棍花钮": 22.11}, obliquePriceRatio: 1.5, laserSurfaceLetter: 6.00, laserSideEdge: 9.00 },
+            "42L": { standardThickness: 4.2, types: { "磁钮": 22.00,"月光": 25.30, "珠光": 26.40, "混色散花": 26.40, "彩虹钮": 44.00, "棍花钮": 28.60}, obliquePriceRatio: 1.5, laserSurfaceLetter: 6.50, laserSideEdge: 9.00 },
+            "44L": { standardThickness: 4.5, types: { "磁钮": 26.40,"月光": 28.60, "珠光": 30.80, "混色散花": 30.80, "彩虹钮": 50.60, "棍花钮": 35.20}, obliquePriceRatio: 1.5, laserSurfaceLetter: 7.00, laserSideEdge: 10.50 },
+            "46L": { standardThickness: 4.5, types: { "磁钮": 26.40,"月光": 28.60, "珠光": 30.80, "混色散花": 30.80, "彩虹钮": 50.60, "棍花钮": 35.20}, obliquePriceRatio: 1.5, laserSurfaceLetter: 7.00, laserSideEdge: 10.50 },
+            "48L": { standardThickness: 4.8, types: { "磁钮": 30.80,"月光": 33.00, "珠光": 36.30, "混色散花": 36.30, "彩虹钮": 56.10, "棍花钮": 41.80}, obliquePriceRatio: 1.8, laserSurfaceLetter: 8.50, laserSideEdge: 14.00 },
+            "50L": { standardThickness: 4.8, types: { "磁钮": 39.60,"月光": 44.00, "珠光": 44.00, "混色散花": 44.00, "彩虹钮": 60.50, "棍花钮": 50.60}, obliquePriceRatio: 1.8, laserSurfaceLetter: 10.00, laserSideEdge: 22.00 },
+            "54L": { standardThickness: 5.4, types: { "磁钮": 49.50,"月光": 55.00, "珠光": 55.00, "混色散花": 55.00, "彩虹钮": 68.20, "棍花钮": 61.60}, obliquePriceRatio: 1.8, laserSurfaceLetter: 14.00, laserSideEdge: 28.00 },
+            "60L": { standardThickness: 5.4, types: { "磁钮": 49.50,"月光": 55.00, "珠光": 55.00, "混色散花": 55.00, "彩虹钮": 68.20, "棍花钮": 61.60}, obliquePriceRatio: 1.8, laserSurfaceLetter: 14.00, laserSideEdge: 28.00 },
+            "64L": { standardThickness: 5.4, types: { "磁钮": 49.50,"月光": 55.00, "珠光": 55.00, "混色散花": 55.00, "彩虹钮": 68.20, "棍花钮": 61.60}, obliquePriceRatio: 1.8, laserSurfaceLetter: 14.00, laserSideEdge: 28.00 },
+            "70L": { standardThickness: 5.4, types: { "磁钮": 49.50,"月光": 55.00, "珠光": 55.00, "混色散花": 55.00, "彩虹钮": 68.20, "棍花钮": 61.60}, obliquePriceRatio: 1.8, laserSurfaceLetter: 14.00, laserSideEdge: 28.00 }
+        };
+        const thicknessOptionsDefault = [1.0, 1.5, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 6.0];
+        const combinedLSizes = ["12L", "13L", "14L", "15L", "16L", "17L", "18L", "19L", "20L", "22L", "24L", "26L", "27L", "28L", "30L", "32L", "34L", "36L", "38L", "40L", "42L", "44L", "46L", "48L", "50L", "54L", "60L", "64L", "70L"];
+
+         function populateLSizeOptions(selectElement, lValues, placeholderText) {
+             selectElement.innerHTML = `<option value="">${placeholderText}</option>`;
+             lValues.forEach(lVal => {
+                 const option = document.createElement('option');
+                 option.value = lVal;
+                 option.textContent = lVal;
+                 selectElement.appendChild(option);
+             });
+         }
+
+         function toggleButtonSizeInputs() {
+             const sizeType = document.getElementById('sizeType').value;
+             const tubeSizeRow = document.getElementById('tubeSizeRow');
+             const punchSizeRow = document.getElementById('punchSizeRow');
+             const tubeButtonSizeSelect = document.getElementById('tubeButtonSize');
+             const punchButtonSizeSelect = document.getElementById('punchButtonSize');
+
+             if (sizeType === 'tube') {
+                 tubeSizeRow.style.display = 'flex';
+                 punchSizeRow.style.display = 'none';
+                 tubeButtonSizeSelect.disabled = false;
+                 punchButtonSizeSelect.disabled = true;
+                 punchButtonSizeSelect.value = '';
+             } else if (sizeType === 'punch') {
+                 tubeSizeRow.style.display = 'none';
+                 punchSizeRow.style.display = 'flex';
+                 tubeButtonSizeSelect.disabled = true;
+                 punchButtonSizeSelect.disabled = false;
+                 tubeButtonSizeSelect.value = '';
+             } else {
+                 tubeSizeRow.style.display = 'none';
+                 punchSizeRow.style.display = 'none';
+                 tubeButtonSizeSelect.disabled = true;
+                 punchButtonSizeSelect.disabled = true;
+                 tubeButtonSizeSelect.value = '';
+                 punchButtonSizeSelect.value = '';
+             }
+             updateAvailableThicknesses();
+         }
+
+         function getActiveButtonSize() {
+             const sizeType = document.getElementById('sizeType').value;
+             if (sizeType === 'tube') return document.getElementById('tubeButtonSize').value;
+             if (sizeType === 'punch') return document.getElementById('punchButtonSize').value;
+             return null;
+         }
+
+         function updateAvailableThicknesses() {
+             const selectedLSize = getActiveButtonSize();
+             const thicknessSelect = document.getElementById('thickness');
+             thicknessSelect.innerHTML = `<option value="">${translations[currentPageLanguage].selectThickness}</option>`;
+
+             if (selectedLSize && buttonData[selectedLSize]) {
+                 const standardThickness = buttonData[selectedLSize].standardThickness;
+                 const availableThicknesses = thicknessOptionsDefault.filter(thick => thick >= standardThickness);
+                 const standardSuffix = currentPageLanguage === 'en' ? translations.en.standardThicknessSuffixEn : translations.zh.standardThicknessSuffix;
+
+                 availableThicknesses.forEach(thickVal => {
+                     const option = document.createElement('option');
+                     option.value = thickVal.toFixed(1);
+                     option.textContent = thickVal.toFixed(1) + ' mm' +
+                                         (thickVal === standardThickness ? standardSuffix : '');
+                     thicknessSelect.appendChild(option);
+                 });
+
+                 if (standardThickness && availableThicknesses.includes(standardThickness)) {
+                     thicknessSelect.value = standardThickness.toFixed(1);
+                 } else if (availableThicknesses.length > 0) {
+                     thicknessSelect.value = availableThicknesses[0].toFixed(1);
+                 }
+             }
+         }
+
+         function formatNumber(num, decimals = 2) {
+             if (isNaN(parseFloat(num))) return '0.00';
+             return parseFloat(num).toFixed(decimals);
+         }
+
+         function getCurrentDate(lang = currentPageLanguage) {
+             const now = new Date();
+             const year = now.getFullYear();
+             const month = (now.getMonth() + 1).toString().padStart(2, '0');
+             const day = now.getDate().toString().padStart(2, '0');
+             if (lang === 'en') {
+                 return `${year}-${month}-${day}`;
+             }
+             return `${year}年${month}月${day}日`;
+         }
+
+        function getSelectedOptionText(selectId, lang) {
+            const selectElement = document.getElementById(selectId);
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            if (selectedOption && selectedOption.value) {
+                if (selectId === 'sizeModification' && selectedOption.value === 'none') return translations[lang].noChange;
+                if (selectId === 'buttonCraftsmanship' && selectedOption.value === 'none') return translations[lang].noButtonCraftsmanship;
+                if (selectId === 'materialSynergy' && selectedOption.value === 'none') return translations[lang].noMaterialSynergy;
+
+                const langKey = selectedOption.getAttribute('data-lang-key');
+                if (langKey && translations[lang] && translations[lang][langKey]) {
+                    return translations[lang][langKey];
+                }
+                return selectedOption.textContent;
+            }
+            return translations[lang].notProvided;
+        }
+
+
+         function calculatePrice() {
+             const customerName = document.getElementById('customerName').value.trim();
+             const contactInfo = document.getElementById('contactInfo').value.trim();
+             const orderCategoryValue = document.getElementById('orderCategory').value;
+             const buttonMakingDeptValue = document.getElementById('sizeType').value;
+             const buttonLSize = getActiveButtonSize();
+             const typeValue = document.getElementById('type').value;
+             const quantity = parseFloat(document.getElementById('quantity').value);
+             const thickness = parseFloat(document.getElementById('thickness').value);
+             const sizeModificationValue = document.getElementById('sizeModification').value;
+             const buttonCraftsmanshipValue = document.getElementById('buttonCraftsmanship').value;
+             const materialSynergyValue = document.getElementById('materialSynergy').value;
+             const laserOption = document.getElementById('laserOption').value;
+             const obliqueOption = document.getElementById('obliqueOption').value;
+             const oilOption = document.getElementById('oilOption').value;
+
+             if (!customerName || !contactInfo || !orderCategoryValue || !buttonMakingDeptValue || !buttonLSize || !typeValue ||
+                 isNaN(quantity) || quantity <= 0 || isNaN(thickness) || thickness <= 0) {
+                 alert(translations[currentPageLanguage].alertFillAllFields);
+                 return;
+             }
+
+             const data = buttonData[buttonLSize];
+             if (!data || !data.types[typeValue]) {
+                  alert(translations[currentPageLanguage].alertInvalidData.replace('{buttonLSize}', buttonLSize).replace('{type}', typeValue));
+                 return;
+             }
+
+             let basePricePerG = data.types[typeValue];
+             let currentPrice = basePricePerG;
+             let thicknessAdjustmentAmount = 0;
+
+             if (data.standardThickness && thickness !== data.standardThickness) {
+                 const adjustedByThickness = (thickness * basePricePerG / data.standardThickness);
+                 thicknessAdjustmentAmount = adjustedByThickness - basePricePerG;
+                 currentPrice = adjustedByThickness;
+             }
+
+             let sizeModificationCost = 0;
+             if (sizeModificationValue === 'smallToLarge' || sizeModificationValue === 'largeToSmall') {
+                 sizeModificationCost = currentPrice * 0.20;
+                 currentPrice *= 1.20;
+             }
+
+             let buttonCraftsmanshipCost = 0;
+             if (buttonCraftsmanshipValue === 'fishEye' || buttonCraftsmanshipValue === 'canal') {
+                 buttonCraftsmanshipCost = currentPrice * 0.10;
+                 currentPrice *= 1.10;
+             }
+
+             let obliqueCostPerG = 0;
+             if (obliqueOption === 'yes' && data.obliquePriceRatio) {
+                 obliqueCostPerG = currentPrice * (data.obliquePriceRatio - 1);
+                 currentPrice *= data.obliquePriceRatio;
+             }
+
+             let laserCostPerG = 0;
+             if (laserOption === 'surfaceLetter' && data.laserSurfaceLetter !== undefined) {
+                 laserCostPerG = data.laserSurfaceLetter;
+             } else if (laserOption === 'sideEdge' && data.laserSideEdge !== undefined) {
+                 laserCostPerG = data.laserSideEdge;
+             }
+             let priceBeforeSynergyAndOil = currentPrice + laserCostPerG;
+
+
+             let materialSynergyCost = 0;
+             if (materialSynergyValue === 'silverPowder') {
+                 materialSynergyCost = priceBeforeSynergyAndOil * 0.40;
+                 priceBeforeSynergyAndOil *= 1.40;
+             }
+
+             let oilCostPerG = 0;
+             if (oilOption === 'yes') {
+                 oilCostPerG = priceBeforeSynergyAndOil * 0.05;
+                 priceBeforeSynergyAndOil *= 1.05;
+             }
+
+             const finalUnitPrice = priceBeforeSynergyAndOil;
+             const totalPrice = finalUnitPrice * quantity;
+             const lang = currentPageLanguage;
+
+             document.getElementById('resultCustomer').innerHTML = `${translations[lang].customerLabel}：${customerName}${translations[lang].customerInfoSeparator}${contactInfo}`;
+             document.getElementById('resultDate').innerHTML = `${translations[lang].quoteDatePrefix}${getCurrentDate(lang)}`;
+             document.getElementById('resultOrderType').textContent = getSelectedOptionText('orderCategory', lang);
+             document.getElementById('resultButtonType').textContent = getSelectedOptionText('type', lang);
+             document.getElementById('resultButtonMakingDept').textContent = getSelectedOptionText('sizeType', lang);
+             document.getElementById('resultQuantity').textContent = `${formatNumber(quantity, 0)} G`;
+             document.getElementById('resultSizeModification').textContent = getSelectedOptionText('sizeModification', lang);
+             document.getElementById('resultButtonCraftsmanship').textContent = getSelectedOptionText('buttonCraftsmanship', lang);
+             document.getElementById('resultMaterialSynergy').textContent = getSelectedOptionText('materialSynergy', lang);
+
+             document.getElementById('basePrice').innerHTML = `${formatNumber(basePricePerG)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('thicknessAdj').innerHTML = `${formatNumber(thicknessAdjustmentAmount)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('sizeModificationCost').innerHTML = `${formatNumber(sizeModificationCost)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('buttonCraftsmanshipCost').innerHTML = `${formatNumber(buttonCraftsmanshipCost)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('obliqueCost').innerHTML = `${formatNumber(obliqueCostPerG)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('laserCost').innerHTML = `${formatNumber(laserCostPerG)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('materialSynergyCost').innerHTML = `${formatNumber(materialSynergyCost)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('oilCost').innerHTML = `${formatNumber(oilCostPerG)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('unitPrice').innerHTML = `${formatNumber(finalUnitPrice)} <span data-lang-key="currencyUnitG">${translations[lang].currencyUnitG}</span>`;
+             document.getElementById('totalPrice').innerHTML = `${formatNumber(totalPrice)} <span data-lang-key="currencyUnit">${translations[lang].currencyUnit}</span>`;
+
+             applyTranslations(lang, document.getElementById('result'));
+
+             document.getElementById('result').className = 'card fade-in has-content';
+             document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+             // 在calculatePrice函数内，info-grid填充后添加如下逻辑：
+             // 先移除旧的动态项，避免重复
+             ['laserOptionCard', 'obliqueOptionCard', 'oilOptionCard'].forEach(id => {
+                 const old = document.getElementById(id);
+                 if (old) old.parentNode.removeChild(old);
+             });
+
+             // 镭射选项
+             if (laserOption !== 'none') {
+                 const card = document.createElement('div');
+                 card.className = 'info-card';
+                 card.id = 'laserOptionCard';
+                 card.innerHTML = `<h3>镭射选项</h3><p>${document.querySelector('#laserOption option:checked').textContent}</p>`;
+                 document.querySelector('.info-grid').appendChild(card);
+             }
+             // 斜车选项
+             if (obliqueOption !== 'no') {
+                 const card = document.createElement('div');
+                 card.className = 'info-card';
+                 card.id = 'obliqueOptionCard';
+                 card.innerHTML = `<h3>斜车选项</h3><p>${document.querySelector('#obliqueOption option:checked').textContent}</p>`;
+                 document.querySelector('.info-grid').appendChild(card);
+             }
+             // 泡油选项
+             if (oilOption !== 'no') {
+                 const card = document.createElement('div');
+                 card.className = 'info-card';
+                 card.id = 'oilOptionCard';
+                 card.innerHTML = `<h3>泡油选项</h3><p>${document.querySelector('#oilOption option:checked').textContent}</p>`;
+                 document.querySelector('.info-grid').appendChild(card);
+             }
+         }
+
+        function downloadResultImage() {
+            const resultDivForImage = document.getElementById('result');
+            // 1. 隐藏 actions 区域
+            const actionsDiv = resultDivForImage.querySelector('.actions');
+            let prevDisplay = null;
+            if (actionsDiv) {
+                prevDisplay = actionsDiv.style.display;
+                actionsDiv.style.display = 'none';
+            }
+            const downloadBtn = resultDivForImage.querySelector('#downloadButton');
+            if(downloadBtn) downloadBtn.style.display = 'none';
+
+            html2canvas(resultDivForImage, {
+                backgroundColor: '#2C2F37',
+                scale: 2.5,
+                useCORS: true,
+                logging: false,
+                onclone: function (clonedDoc) {
+                    const clonedResultDiv = clonedDoc.getElementById('result');
+                    if (clonedResultDiv) {
+                        clonedResultDiv.style.color = '#FFFFFF';
+                        clonedResultDiv.style.background = '#2C2F37';
+                        clonedResultDiv.style.padding = '15px 8px 15px 8px';
+                        const companyTitle = clonedResultDiv.querySelector('.company-title');
+                        if(companyTitle) companyTitle.style.color = '#FFFFFF';
+                        const customerInfo = clonedResultDiv.querySelector('.customer-info');
+                        if(customerInfo) customerInfo.style.color = '#A0A0A0';
+                        const dateQuote = clonedResultDiv.querySelector('.date-quote');
+                        if(dateQuote) dateQuote.style.color = '#A0A0A0';
+                        clonedResultDiv.querySelectorAll('table th').forEach(el => el.style.color = '#E0E0E0');
+                        const sectionTitles = clonedResultDiv.querySelectorAll('table td[colspan="2"][style*="text-align:center"]');
+                        sectionTitles.forEach(el => {
+                            el.style.color = '#FFFFFF';
+                        });
+                        const totalLabel = clonedResultDiv.querySelector('.total td:first-child strong');
+                        if(totalLabel) totalLabel.style.color = '#00FF00'; else {
+                            const totalLabelTd = clonedResultDiv.querySelector('.total td:first-child');
+                            if(totalLabelTd) totalLabelTd.style.color = '#00FF00';
+                        }
+                        const totalValue = clonedResultDiv.querySelector('.total td strong');
+                        if(totalValue) totalValue.style.color = '#00FF00';
+                        const note = clonedResultDiv.querySelector('.note');
+                        if(note) note.style.color = '#A0A0A0';
+                        clonedResultDiv.className = 'has-content';
+                        clonedResultDiv.style.display = 'block';
+                        clonedResultDiv.style.borderRadius = '0';
+                    }
+                }
+            }).then(canvas => {
+                // 上下padding
+                const paddingPx = 35 * 2.5;
+                const paddedCanvas = document.createElement('canvas');
+                paddedCanvas.width = canvas.width;
+                paddedCanvas.height = canvas.height + 2 * paddingPx;
+                const ctx = paddedCanvas.getContext('2d');
+                ctx.fillStyle = '#2C2F37';
+                ctx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
+                ctx.drawImage(canvas, 0, paddingPx);
+
+                // 水印
+                const watermarkText = '合盛辅料';
+                const fontSize = Math.max(6, Math.min(paddedCanvas.width / 70, paddedCanvas.height / 45) * 0.8);
+                ctx.font = `normal ${fontSize}px Roboto`;
+                ctx.fillStyle = 'rgba(128, 128, 128, 0.12)';
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                const angle = -Math.PI / 4;
+                const textMetrics = ctx.measureText(watermarkText);
+                const textWidth = textMetrics.width;
+                const xSpacing = textWidth * 2.5;
+                const ySpacing = fontSize * 6.0;
+                ctx.save();
+                for (let y = -paddedCanvas.height * 0.25; y < paddedCanvas.height * 1.25; y += ySpacing) {
+                    for (let x = -paddedCanvas.width * 0.25; x < paddedCanvas.width * 1.25; x += xSpacing) {
+                        ctx.save();
+                        ctx.translate(x + ((Math.floor(y / ySpacing)) % 2 === 0 ? 0 : xSpacing / 2), y);
+                        ctx.rotate(angle);
+                        ctx.fillText(watermarkText, 0, 0);
+                        ctx.restore();
+                    }
+                }
+                ctx.restore();
+
+                const fileName = "合作共赢.静候佳音.jpg";
+                const link = document.createElement('a');
+                link.download = fileName;
+                const imageDataUrl = paddedCanvas.toDataURL('image/jpeg', 0.9);
+                link.href = imageDataUrl;
+                link.click();
+                if(downloadBtn) downloadBtn.style.display = 'block';
+                // 2. 恢复 actions 区域显示
+                if (actionsDiv) actionsDiv.style.display = prevDisplay;
+            }).catch(error => {
+                alert('图片生成失败，请重试或检查浏览器控制台获取错误信息。');
+                if(downloadBtn) downloadBtn.style.display = 'block';
+                if (actionsDiv) actionsDiv.style.display = prevDisplay;
+            });
+        }
+
+         function resetForm() {
+             document.getElementById('customerName').value = '';
+             document.getElementById('contactInfo').value = '';
+             document.getElementById('orderCategory').value = '';
+             document.getElementById('type').value = '';
+             document.getElementById('sizeModification').value = 'none';
+             document.getElementById('sizeType').value = '';
+             document.getElementById('buttonCraftsmanship').value = 'none';
+             document.getElementById('tubeButtonSize').value = '';
+             document.getElementById('punchButtonSize').value = '';
+             document.getElementById('quantity').value = '100';
+             document.getElementById('thickness').innerHTML = `<option value="">${translations[currentPageLanguage].selectThickness}</option>`;
+             document.getElementById('materialSynergy').value = 'none';
+             document.getElementById('laserOption').value = 'none';
+             document.getElementById('obliqueOption').value = 'no';
+             document.getElementById('oilOption').value = 'no';
+
+             document.getElementById('result').className = 'card';
+
+             document.getElementById('tubeSizeRow').style.display = 'none';
+             document.getElementById('punchSizeRow').style.display = 'none';
+             document.getElementById('tubeButtonSize').disabled = true;
+             document.getElementById('punchButtonSize').disabled = true;
+
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+         }
+
+         window.onload = function() {
+             document.querySelectorAll('#orderCategory option').forEach(opt => {
+                 if(opt.value === "样品订单") opt.dataset.langKey = "sampleOrder";
+                 if(opt.value === "量产订单") opt.dataset.langKey = "massProductionOrder";
+             });
+             document.querySelectorAll('#type option').forEach(opt => {
+                 if(opt.value === "磁钮") opt.dataset.langKey = "magneticButton";
+                 if(opt.value === "月光") opt.dataset.langKey = "moonlightButton";
+                 if(opt.value === "珠光") opt.dataset.langKey = "pearlButton";
+                 if(opt.value === "混色散花") opt.dataset.langKey = "mixedColorButton";
+                 if(opt.value === "彩虹钮") opt.dataset.langKey = "rainbowButton";
+                 if(opt.value === "棍花钮") opt.dataset.langKey = "stickPatternButton";
+             });
+             document.querySelectorAll('#sizeModification option').forEach(opt => {
+                 if(opt.value === "none") opt.dataset.langKey = "noChange";
+                 if(opt.value === "smallToLarge") opt.dataset.langKey = "smallToLarge";
+                 if(opt.value === "largeToSmall") opt.dataset.langKey = "largeToSmall";
+             });
+             document.querySelectorAll('#sizeType option').forEach(opt => {
+                 if(opt.value === "tube") opt.dataset.langKey = "tubeProcess";
+                 if(opt.value === "punch") opt.dataset.langKey = "punchProcess";
+             });
+             document.querySelectorAll('#buttonCraftsmanship option').forEach(opt => {
+                 if(opt.value === "none") opt.dataset.langKey = "noButtonCraftsmanship";
+                 if(opt.value === "fishEye") opt.dataset.langKey = "fishEye";
+                 if(opt.value === "canal") opt.dataset.langKey = "canal";
+             });
+             document.querySelectorAll('#materialSynergy option').forEach(opt => {
+                 if(opt.value === "none") opt.dataset.langKey = "noMaterialSynergy";
+                 if(opt.value === "silverPowder") opt.dataset.langKey = "silverPowder";
+             });
+             document.querySelectorAll('#laserOption option').forEach(opt => {
+                if(opt.value === "none") opt.dataset.langKey = "noLaser";
+                if(opt.value === "surfaceLetter") opt.dataset.langKey = "surfaceLetterLaser";
+                if(opt.value === "sideEdge") opt.dataset.langKey = "sideEdgeLaser";
+             });
+             document.querySelectorAll('#obliqueOption option').forEach(opt => {
+                if(opt.value === "no") opt.dataset.langKey = "noOblique";
+                if(opt.value === "yes") opt.dataset.langKey = "yesOblique";
+             });
+            document.querySelectorAll('#oilOption option').forEach(opt => {
+                if(opt.value === "no") opt.dataset.langKey = "noOil";
+                if(opt.value === "yes") opt.dataset.langKey = "yesOil";
+            });
+
+             setPageLanguage(currentPageLanguage);
+             setDownloadLanguage(preferredDownloadLanguage);
+
+             const tubeButtonSizeSelect = document.getElementById('tubeButtonSize');
+             const punchButtonSizeSelect = document.getElementById('punchButtonSize');
+
+             populateLSizeOptions(tubeButtonSizeSelect, combinedLSizes, translations[currentPageLanguage].selectTubeSize);
+             populateLSizeOptions(punchButtonSizeSelect, combinedLSizes, translations[currentPageLanguage].selectPunchSize);
+
+             toggleButtonSizeInputs();
+
+             document.getElementById('type').addEventListener('change', updateAvailableThicknesses);
+             document.getElementById('sizeType').addEventListener('change', toggleButtonSizeInputs);
+             tubeButtonSizeSelect.addEventListener('change', updateAvailableThicknesses);
+             punchButtonSizeSelect.addEventListener('change', updateAvailableThicknesses);
+
+             applyTranslations(currentPageLanguage);
+         };
+     </script>
+ </body>
+ </html>

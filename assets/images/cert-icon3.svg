@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Base Circle -->
+  <circle cx="32" cy="32" r="30" fill="#F5F5F5" stroke="#C9A96E" stroke-width="1.5" />
+  
+  <!-- Test Tube -->
+  <path d="M28 12L28 38C28 42 36 42 36 38L36 12" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" />
+  
+  <!-- Test Tube Top -->
+  <path d="M26 12L38 12" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" />
+  
+  <!-- Liquid in Test Tube -->
+  <path d="M28 30L28 38C28 42 36 42 36 38L36 30" fill="rgba(201, 169, 110, 0.2)" stroke="#C9A96E" stroke-width="0.5" />
+  
+  <!-- Bubbles in Test Tube -->
+  <circle cx="30" cy="34" r="1" fill="#C9A96E" />
+  <circle cx="33" cy="32" r="1.5" fill="#C9A96E" />
+  <circle cx="31" cy="36" r="1" fill="#C9A96E" />
+  
+  <!-- Strength Testing Symbol -->
+  <path d="M20 46L44 46" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M24 46L24 52" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M40 46L40 52" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M24 52L40 52" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" />
+  
+  <!-- Measurement Lines -->
+  <path d="M32 16L34 16" fill="none" stroke="#C9A96E" stroke-width="1" />
+  <path d="M32 20L34 20" fill="none" stroke="#C9A96E" stroke-width="1" />
+  <path d="M32 24L34 24" fill="none" stroke="#C9A96E" stroke-width="1" />
+  <path d="M32 28L34 28" fill="none" stroke="#C9A96E" stroke-width="1" />
+</svg> 

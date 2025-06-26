@@ -1,0 +1,93 @@
+/* 强制使用亮色主题样式 */
+
+/* 覆盖暗色主题设置 */
+[data-theme="dark"] {
+    /* 使用亮色主题的变量 */
+    --fashion-charcoal: #2C2C2C !important;          /* 主要文字色 - 时尚炭黑 */
+    --fashion-warm-gray: #6B6B6B !important;         /* 次要文字色 - 温暖灰 */
+    --fashion-light-gray: #F8F8F8 !important;        /* 背景色 - 优雅浅灰 */
+    --fashion-cream: #FEFEFE !important;             /* 纯净白 - 奢华质感 */
+    --fashion-gold: #C9A96E !important;              /* 时尚金 - 低调奢华 */
+    --fashion-gold-light: #E8D5B7 !important;        /* 浅金色 - 精致点缀 */
+    --fashion-gold-dark: #B8956A !important;         /* 深金色 - 强调色 */
+    
+    /* 背景系统 - 层次分明的视觉体验 */
+    --bg-primary: linear-gradient(135deg, #FEFEFE 0%, #F8F8F8 50%, #F5F5F5 100%) !important;
+    --bg-secondary: rgba(254, 254, 254, 0.92) !important;
+    --bg-glass: rgba(255, 255, 255, 0.85) !important;
+    --bg-overlay: rgba(44, 44, 44, 0.05) !important;
+    
+    /* 文字系统 - 时尚排版标准 */
+    --text-primary: var(--fashion-charcoal) !important;
+    --text-secondary: var(--fashion-warm-gray) !important;
+    --text-accent: var(--fashion-gold) !important;
+    --text-light: rgba(44, 44, 44, 0.7) !important;
+    --text-muted: rgba(107, 107, 107, 0.8) !important;
+    
+    /* 边框与分割线 - 精致细节 */
+    --border-primary: rgba(44, 44, 44, 0.08) !important;
+    --border-secondary: rgba(107, 107, 107, 0.12) !important;
+    --border-accent: rgba(201, 169, 110, 0.25) !important;
+    --border-light: rgba(248, 248, 248, 0.6) !important;
+    
+    /* 交互状态 - 优雅反馈 */
+    --hover-bg: rgba(44, 44, 44, 0.04) !important;
+    --hover-accent: rgba(201, 169, 110, 0.12) !important;
+    --active-bg: rgba(201, 169, 110, 0.15) !important;
+    --focus-ring: rgba(201, 169, 110, 0.3) !important;
+    
+    /* 阴影系统 - 层次感营造 */
+    --shadow-subtle: 0 2px 8px rgba(44, 44, 44, 0.04) !important;
+    --shadow-soft: 0 4px 16px rgba(44, 44, 44, 0.08) !important;
+    --shadow-medium: 0 8px 32px rgba(44, 44, 44, 0.12) !important;
+    --shadow-strong: 0 16px 64px rgba(44, 44, 44, 0.16) !important;
+    --shadow-accent: 0 4px 20px rgba(201, 169, 110, 0.15) !important;
+}
+
+/* 覆盖所有暗色主题特定样式 */
+[data-theme="dark"] .main-nav {
+    background: rgba(254, 254, 254, 0.88) !important;
+    border-color: rgba(44, 44, 44, 0.06) !important;
+    box-shadow: var(--shadow-soft),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 var(--border-accent) !important;
+}
+
+[data-theme="dark"] .nav-item {
+    color: rgba(44, 44, 44, 0.7) !important;
+    background: transparent !important;
+}
+
+[data-theme="dark"] .nav-item:hover:not(.active) {
+    background: var(--nav-item-hover) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-accent) !important;
+}
+
+[data-theme="dark"] .nav-item.active {
+    color: var(--text-primary) !important;
+    background: var(--nav-item-active) !important;
+    border-color: var(--border-accent) !important;
+}
+
+/* 覆盖页脚样式 */
+[data-theme="dark"] .footer-dark-complex {
+    background: #232323 !important;
+}
+
+[data-theme="dark"] .footer-dark-title::after {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="dark"] .footer-dark-social-icon {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 隐藏主题切换按钮 */
+.theme-switch-wrapper,
+.theme-switch {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+} 

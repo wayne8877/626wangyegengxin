@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="#F5F5F5" stroke="#C9A96E" stroke-width="1.5" />
+  
+  <!-- Lightning Bolt -->
+  <path d="M36 20H42L28 44H22L36 20Z" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.5" />
+  
+  <!-- Circular Arrows representing efficiency -->
+  <path d="M48 32C48 40.8366 40.8366 48 32 48C23.1634 48 16 40.8366 16 32C16 23.1634 23.1634 16 32 16" 
+        fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-dasharray="4 2" />
+  
+  <!-- Arrow Head -->
+  <path d="M32 14L35 18L29 18L32 14Z" fill="#C9A96E" />
+  
+  <!-- Small Gear -->
+  <circle cx="22" cy="24" r="3" fill="none" stroke="#C9A96E" stroke-width="1" />
+  <circle cx="22" cy="24" r="1" fill="#C9A96E" />
+  
+  <!-- Large Gear -->
+  <circle cx="42" cy="40" r="5" fill="none" stroke="#C9A96E" stroke-width="1" />
+  <circle cx="42" cy="40" r="1.5" fill="#C9A96E" />
+  
+  <!-- Gear Teeth -->
+  <path d="M42 33V35M42 45V47M35 40H37M47 40H49M36.5 34.5L38 36M46 44L47.5 45.5M36.5 45.5L38 44M46 36L47.5 34.5" 
+        stroke="#C9A96E" stroke-width="1" />
+</svg> 

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Left person circle -->
+  <circle cx="12" cy="27" r="5" fill="url(#personGradient)" stroke="#C9A96E" stroke-width="1.5"/>
+  
+  <!-- Right person circle -->
+  <circle cx="52" cy="27" r="5" fill="url(#personGradient)" stroke="#C9A96E" stroke-width="1.5"/>
+  
+  <!-- Handshake connection -->
+  <path d="M17 27H22L26 22H38L42 27H47" stroke="url(#handshakeGradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Bottom structure -->
+  <path d="M7 40V38C7 34.6863 9.68629 32 13 32H18.5L32 44L45.5 32H51C54.3137 32 57 34.6863 57 38V40" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Center pillar -->
+  <path d="M32 44V56" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Base structure -->
+  <path d="M24 52L32 56L40 52" stroke="url(#baseGradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Center connection point -->
+  <circle cx="32" cy="27" r="3" fill="url(#centerGradient)"/>
+  
+  <!-- Subtle glow effect -->
+  <circle cx="32" cy="27" r="6" fill="url(#glowGradient)" opacity="0.2"/>
+  
+  <!-- Connection lines with gradient -->
+  <path d="M22 27C22 27 25 25 32 25C39 25 42 27 42 27" stroke="url(#connectionGradient)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Definitions for gradients -->
+  <defs>
+    <linearGradient id="personGradient" x1="7" y1="22" x2="17" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    
+    <linearGradient id="handshakeGradient" x1="17" y1="22" x2="47" y2="27" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="50%" stop-color="#C9A96E"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+    
+    <linearGradient id="baseGradient" x1="24" y1="52" x2="40" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C9A96E"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E"/>
+    </linearGradient>
+    
+    <radialGradient id="centerGradient" cx="32" cy="27" r="3" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E"/>
+    </radialGradient>
+    
+    <radialGradient id="glowGradient" cx="32" cy="27" r="6" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E" stop-opacity="0"/>
+    </radialGradient>
+    
+    <linearGradient id="connectionGradient" x1="22" y1="25" x2="42" y2="27" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+  </defs>
+</svg> 

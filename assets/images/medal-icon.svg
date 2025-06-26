@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Base circle with gradient -->
+  <circle cx="32" cy="24" r="20" fill="url(#medalGradient)" stroke="#C9A96E" stroke-width="1.5"/>
+  
+  <!-- Inner circle -->
+  <circle cx="32" cy="24" r="14" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1" opacity="0.9"/>
+  
+  <!-- Center emblem -->
+  <circle cx="32" cy="24" r="8" fill="url(#emblemGradient)"/>
+  
+  <!-- Star shape in center -->
+  <path d="M32 19l1.5 3.5 3.5.5-2.5 2.5.5 3.5-3-1.5-3 1.5.5-3.5-2.5-2.5 3.5-.5z" fill="#FFFFFF"/>
+  
+  <!-- Ribbon -->
+  <path d="M22 42L18 60L32 52L46 60L42 42" stroke="url(#ribbonGradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Connecting lines -->
+  <path d="M22 42L27 38H37L42 42" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Definitions for gradients -->
+  <defs>
+    <linearGradient id="medalGradient" x1="12" y1="4" x2="52" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5F5F5"/>
+      <stop offset="100%" stop-color="#E8E8E8"/>
+    </linearGradient>
+    
+    <linearGradient id="emblemGradient" x1="24" y1="16" x2="40" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E"/>
+    </linearGradient>
+    
+    <linearGradient id="ribbonGradient" x1="18" y1="42" x2="46" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C9A96E"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#C9A96E"/>
+    </linearGradient>
+  </defs>
+</svg> 

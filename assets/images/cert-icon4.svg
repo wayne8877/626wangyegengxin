@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Base Circle -->
+  <circle cx="32" cy="32" r="30" fill="#F5F5F5" stroke="#C9A96E" stroke-width="1.5" />
+  
+  <!-- People Silhouettes -->
+  <circle cx="32" cy="22" r="6" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M32 28L32 44" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M32 34L24 44" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M32 34L40 44" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  
+  <circle cx="18" cy="24" r="4" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M18 28L18 40" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M18 32L12 40" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M18 32L24 40" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  
+  <circle cx="46" cy="24" r="4" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M46 28L46 40" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M46 32L40 40" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  <path d="M46 32L52 40" fill="none" stroke="#C9A96E" stroke-width="1.5" />
+  
+  <!-- Protective Circle -->
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#C9A96E" stroke-width="1" stroke-dasharray="2 2" />
+  
+  <!-- Heart Symbol -->
+  <path d="M32 46C32 46 40 40 40 36C40 33 38 32 36 32C34 32 32 34 32 34C32 34 30 32 28 32C26 32 24 33 24 36C24 40 32 46 32 46Z" fill="rgba(201, 169, 110, 0.2)" stroke="#C9A96E" stroke-width="1" />
+</svg> 
